@@ -3,7 +3,7 @@
 !/.yarn/plugins
 !/.yarn/releases
 !/.yarn/sdks
-vscode/*
+.vscode/*
 build/*
 input/*
 *.zst
