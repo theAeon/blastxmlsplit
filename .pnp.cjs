@@ -19,14 +19,14 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
     ],
     "dependencyTreeRoots": [
       {
-        "name": "xmlsplit",
+        "name": "blastxmlsplit",
         "reference": "workspace:."
       }
     ],
     "enableTopLevelFallback": true,
     "ignorePatternData": "(^(?:\\.yarn\\/sdks(?:\\/(?!\\.{1,2}(?:\\/|$))(?:(?:(?!(?:^|\\/)\\.{1,2}(?:\\/|$)).)*?)|$))$)",
     "fallbackExclusionList": [
-      ["xmlsplit", ["workspace:."]]
+      ["blastxmlsplit", ["workspace:."]]
     ],
     "fallbackPool": [
     ],
@@ -35,7 +35,7 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         [null, {
           "packageLocation": "./",
           "packageDependencies": [
-            ["@microsoft/api-documenter", "npm:7.13.48"],
+            ["@microsoft/api-documenter", "npm:7.13.49"],
             ["@microsoft/tsdoc", "npm:0.13.2"],
             ["@tsconfig/node16", "npm:1.0.2"],
             ["@types/node", "npm:16.9.1"],
@@ -46,13 +46,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@microsoft/api-documenter", [
-        ["npm:7.13.48", {
-          "packageLocation": "./.yarn/cache/@microsoft-api-documenter-npm-7.13.48-9a985485b4-c4f578c28d.zip/node_modules/@microsoft/api-documenter/",
+        ["npm:7.13.49", {
+          "packageLocation": "./.yarn/cache/@microsoft-api-documenter-npm-7.13.49-fc75e16696-132be23995.zip/node_modules/@microsoft/api-documenter/",
           "packageDependencies": [
-            ["@microsoft/api-documenter", "npm:7.13.48"],
-            ["@microsoft/api-extractor-model", "npm:7.13.6"],
+            ["@microsoft/api-documenter", "npm:7.13.49"],
+            ["@microsoft/api-extractor-model", "npm:7.13.7"],
             ["@microsoft/tsdoc", "npm:0.13.2"],
-            ["@rushstack/node-core-library", "npm:3.40.1"],
+            ["@rushstack/node-core-library", "npm:3.40.2"],
             ["@rushstack/ts-command-line", "npm:4.9.0"],
             ["colors", "npm:1.2.5"],
             ["js-yaml", "npm:3.13.1"],
@@ -62,13 +62,13 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@microsoft/api-extractor-model", [
-        ["npm:7.13.6", {
-          "packageLocation": "./.yarn/cache/@microsoft-api-extractor-model-npm-7.13.6-d625ab7f85-34ee140612.zip/node_modules/@microsoft/api-extractor-model/",
+        ["npm:7.13.7", {
+          "packageLocation": "./.yarn/cache/@microsoft-api-extractor-model-npm-7.13.7-2a403b7195-84fef85fb2.zip/node_modules/@microsoft/api-extractor-model/",
           "packageDependencies": [
-            ["@microsoft/api-extractor-model", "npm:7.13.6"],
+            ["@microsoft/api-extractor-model", "npm:7.13.7"],
             ["@microsoft/tsdoc", "npm:0.13.2"],
             ["@microsoft/tsdoc-config", "npm:0.15.2"],
-            ["@rushstack/node-core-library", "npm:3.40.1"]
+            ["@rushstack/node-core-library", "npm:3.40.2"]
           ],
           "linkType": "HARD",
         }]
@@ -96,10 +96,10 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
         }]
       ]],
       ["@rushstack/node-core-library", [
-        ["npm:3.40.1", {
-          "packageLocation": "./.yarn/cache/@rushstack-node-core-library-npm-3.40.1-a6935893ed-9e9fa25f3d.zip/node_modules/@rushstack/node-core-library/",
+        ["npm:3.40.2", {
+          "packageLocation": "./.yarn/cache/@rushstack-node-core-library-npm-3.40.2-6f8164e289-16b8df209c.zip/node_modules/@rushstack/node-core-library/",
           "packageDependencies": [
-            ["@rushstack/node-core-library", "npm:3.40.1"],
+            ["@rushstack/node-core-library", "npm:3.40.2"],
             ["@types/node", "npm:10.17.13"],
             ["colors", "npm:1.2.5"],
             ["fs-extra", "npm:7.0.1"],
@@ -181,6 +181,21 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["sprintf-js", "npm:1.0.3"]
           ],
           "linkType": "HARD",
+        }]
+      ]],
+      ["blastxmlsplit", [
+        ["workspace:.", {
+          "packageLocation": "./",
+          "packageDependencies": [
+            ["blastxmlsplit", "workspace:."],
+            ["@microsoft/api-documenter", "npm:7.13.49"],
+            ["@microsoft/tsdoc", "npm:0.13.2"],
+            ["@tsconfig/node16", "npm:1.0.2"],
+            ["@types/node", "npm:16.9.1"],
+            ["saxes", "npm:5.0.1"],
+            ["typescript", "patch:typescript@npm%3A4.4.3#~builtin<compat/typescript>::version=4.4.3&hash=32657b"]
+          ],
+          "linkType": "SOFT",
         }]
       ]],
       ["colors", [
@@ -482,21 +497,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["xmlchars", "npm:2.2.0"]
           ],
           "linkType": "HARD",
-        }]
-      ]],
-      ["xmlsplit", [
-        ["workspace:.", {
-          "packageLocation": "./",
-          "packageDependencies": [
-            ["xmlsplit", "workspace:."],
-            ["@microsoft/api-documenter", "npm:7.13.48"],
-            ["@microsoft/tsdoc", "npm:0.13.2"],
-            ["@tsconfig/node16", "npm:1.0.2"],
-            ["@types/node", "npm:16.9.1"],
-            ["saxes", "npm:5.0.1"],
-            ["typescript", "patch:typescript@npm%3A4.4.3#~builtin<compat/typescript>::version=4.4.3&hash=32657b"]
-          ],
-          "linkType": "SOFT",
         }]
       ]],
       ["yallist", [

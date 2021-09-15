@@ -6,30 +6,30 @@ __metadata:
   cacheKey: 8
 
 "@microsoft/api-documenter@npm:^7.13.48":
-  version: 7.13.48
-  resolution: "@microsoft/api-documenter@npm:7.13.48"
+  version: 7.13.49
+  resolution: "@microsoft/api-documenter@npm:7.13.49"
   dependencies:
-    "@microsoft/api-extractor-model": 7.13.6
+    "@microsoft/api-extractor-model": 7.13.7
     "@microsoft/tsdoc": 0.13.2
-    "@rushstack/node-core-library": 3.40.1
+    "@rushstack/node-core-library": 3.40.2
     "@rushstack/ts-command-line": 4.9.0
     colors: ~1.2.1
     js-yaml: ~3.13.1
     resolve: ~1.17.0
   bin:
     api-documenter: bin/api-documenter
-  checksum: c4f578c28d63db1059cc6ddc7e150366da38b0b6060b30ea1324b18a924288adecc86898a86ef5bb2f875089c2cb3d0e78233fc2fb26c6d020791795370b447f
+  checksum: 132be239950661d23b18ce7dd16f5cd09c5680c7461c49c0f3737849c27afc3d9dcdebe49c6b959ac00ca12a993dfc60672a24d53b429ead6fed5e7e87096b3b
   languageName: node
   linkType: hard
 
-"@microsoft/api-extractor-model@npm:7.13.6":
-  version: 7.13.6
-  resolution: "@microsoft/api-extractor-model@npm:7.13.6"
+"@microsoft/api-extractor-model@npm:7.13.7":
+  version: 7.13.7
+  resolution: "@microsoft/api-extractor-model@npm:7.13.7"
   dependencies:
     "@microsoft/tsdoc": 0.13.2
     "@microsoft/tsdoc-config": ~0.15.2
-    "@rushstack/node-core-library": 3.40.1
-  checksum: 34ee1406126f9a662232271834b66a39aa5f6c00a24043997b3f96300e4654a52e8f8326026b20e2b35a6af8e10f2ca37f82dceea2a90281870fbcba5bdc1874
+    "@rushstack/node-core-library": 3.40.2
+  checksum: 84fef85fb201ba228e6fb37c947f390826ba640ac3c8bf8ec4479c813d5529781b27be23e89bc29f54c1434cfc492aec1e6a2753b4384a1f90a4413cd1d3ade2
   languageName: node
   linkType: hard
 
@@ -52,9 +52,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@rushstack/node-core-library@npm:3.40.1":
-  version: 3.40.1
-  resolution: "@rushstack/node-core-library@npm:3.40.1"
+"@rushstack/node-core-library@npm:3.40.2":
+  version: 3.40.2
+  resolution: "@rushstack/node-core-library@npm:3.40.2"
   dependencies:
     "@types/node": 10.17.13
     colors: ~1.2.1
@@ -65,7 +65,7 @@ __metadata:
     semver: ~7.3.0
     timsort: ~0.3.0
     z-schema: ~3.18.3
-  checksum: 9e9fa25f3d9a4dffffe14bbce98c67bbda5290d5d4464d5a5016523cf0a9b344a5d9b07cfe72c71c21b7236fadccbeedda2342d30964cd543acb98c9963fddf3
+  checksum: 16b8df209cd67405cd82c0c653b79d02635f1a57cb6405942393ee4093704041f647e8928d0717aade19f66c125855dfee22c157ed3ae7ce00b8965fe4440013
   languageName: node
   linkType: hard
 
@@ -129,6 +129,19 @@ __metadata:
   checksum: 7ca6e45583a28de7258e39e13d81e925cfa25d7d4aacbf806a382d3c02fcb13403a07fb8aeef949f10a7cfe4a62da0e2e807b348a5980554cc28ee573ef95945
   languageName: node
   linkType: hard
+
+"blastxmlsplit@workspace:.":
+  version: 0.0.0-use.local
+  resolution: "blastxmlsplit@workspace:."
+  dependencies:
+    "@microsoft/api-documenter": ^7.13.48
+    "@microsoft/tsdoc": ^0.13.2
+    "@tsconfig/node16": ^1.0.2
+    "@types/node": ^16.9.1
+    saxes: ~5
+    typescript: ^4.4.3
+  languageName: unknown
+  linkType: soft
 
 "colors@npm:~1.2.1":
   version: 1.2.5
@@ -421,19 +434,6 @@ typescript@^4.4.3:
   checksum: 8c70ac94070ccca03f47a81fcce3b271bd1f37a591bf5424e787ae313fcb9c212f5f6786e1fa82076a2c632c0141552babcd85698c437506dfa6ae2d58723062
   languageName: node
   linkType: hard
-
-"xmlsplit@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "xmlsplit@workspace:."
-  dependencies:
-    "@microsoft/api-documenter": ^7.13.48
-    "@microsoft/tsdoc": ^0.13.2
-    "@tsconfig/node16": ^1.0.2
-    "@types/node": ^16.9.1
-    saxes: ~5
-    typescript: ^4.4.3
-  languageName: unknown
-  linkType: soft
 
 "yallist@npm:^4.0.0":
   version: 4.0.0
