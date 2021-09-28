@@ -1,6 +1,11 @@
 "use strict"
 
 import fs = require("fs");
+import { cwd } from 'process';
+
+
+import temp = require("temp");
+temp.track();
 
 import path = require("path");
 
@@ -10,50 +15,55 @@ import stream = require("stream");
 
 import readline = require('readline');
 
-import { once, EventEmitter, errorMonitor } from 'events';
+import { once, EventEmitter} from 'events';
 import { parse } from "path/posix";
 import { start } from "repl";
+import assert = require("assert");
+import { AssertionError } from "assert/strict";
 
-type query = string | null;
+type Query = fs.PathLike
 
 
 
 class doc extends saxes.SaxesParser {
-  Path: fs.PathOrFileDescriptor
+  Path: fs.PathLike
   writeStream: fs.WriteStream
-  queryPath: query
-  basePath: fs.PathOrFileDescriptor
+  basePath: fs.PathLike
   classEmitter: EventEmitter
-  done: boolean
   constructor(Path = filePath) {
     super()
     this.classEmitter = new EventEmitter()
-    this.queryPath = null
-    let z = this.setQuery.bind(this)
-    this.classEmitter.on('start', function f(arg1: string) {return z(arg1)} )
-    let x = this.start.bind(this)
-    this.classEmitter.on('start', function f() {return x()} )
     this.Path = filePath
-    this.basePath =path.basename(filePath)
-    fs.mkdir("./output", {recursive: true}, (err) => {console.trace(); process.exit(1)});
-    fs.mkdir(`output/"${this.basePath}`, {recursive: true}, (err) => {console.trace(); process.exit(1)});
-    this.writeStream = fs.createWriteStream(basePath + "tmp")
-    let y = this.finish.bind(this)
-    this.classEmitter.on('finish', function f() {return y()} )
-    this.done = true
+    this.basePath = path.basename(filePath)
+    this.Path = cwd() + `/output/${this.basePath}`
+    try{
+      let a = fs.mkdirSync(this.Path, {recursive: true});
+      assert((typeof a !== undefined))
+    }
+    catch (err) {
+      console.error("could not create folder", 404)
+      process.exit
+    }
+    this.writeStream = temp.createWriteStream()
+    this.on('end', () => this.classEmitter.emit('end'))
+    this.on('ready', () => this.classEmitter.emit('ready'))
+    this.classEmitter.on('finish', () => this.finish())
   }
-  private setQuery(query: string) {
+  public set queryPath(query: string) {
     this.queryPath = query
   }
-  private start() {
-
-    this.done = false
-    
-  }
   private finish() {
-  /* wait for writestream to close, move file to query, kill close parse stream, die w signal 
-  */
+    if (this.queryPath == null) {
+      console.error('malformed blast xml', 400)
+      process.exit()
+    }
+    this.writeStream.end( () => {
+      fs.copyFileSync(this.writeStream.path, cwd() + this.Path + this.queryPath + '.xml')
+      this.close()
+    }
+    )
   }
+  
 }
 
 
@@ -63,25 +73,36 @@ class doc extends saxes.SaxesParser {
 const { argv } = process;
 
 const filePath = argv[2];
+try {
+assert((typeof filePath === "string"))
+if ((fs.existsSync(cwd() + filePath) || fs.existsSync(filePath) == false)) {
+  throw new Error("does not exist");
+  
 
+}
+}
+catch (err) {
+console.error("could not find input", 404)
+process.exit
+}
 const basePath = path.basename(filePath);
 
 
 
 
 
-(async function processLineByLine() {
+async function processLineByLine() {
   try {
     var parser = new doc;
     var currentPipe = new stream.Duplex
     parser.on("opentag", function fx<TagForOptions> (tag: saxes.SaxesTag) {
-      if (tag.name == "BlastOutput_query-def" ) {
-        parser.classEmitter.emit("query", tag.attributes.value)
-    }});
+      if (tag.name == "BlastOutput_query-def"  && typeof tag.attributes.value == "string") {
+        parser.queryPath = (tag.attributes.value)
+      }});
     
     parser.on("closetag", function fx<TagForOptions> (tag: saxes.SaxesTag) {
        if (tag.name == "BlastOutput" ) {
-       parser.classEmitter.emit("finish")
+        parser.close()
     }});
     
     parser.on("error", function(e) {console.log(e)});
@@ -91,28 +112,37 @@ const basePath = path.basename(filePath);
     const xmlrl = readline.createInterface({
       input: fs.createReadStream(filePath, "utf8"),
       output: currentPipe,
-      crlfDelay: Infinity
-    });
+      crlfDelay: 100,
+      terminal: false,
 
+    });
     xmlrl.on('line', (line) => {
+      let lineMod = line + '\u000A'
       if (line.startsWith('<?xml') == true) {
-      while (parser.done == false) {}
-      currentPipe.unpipe
-      parser = new doc
-      currentPipe.pipe(parser.writeStream)
-      }
-      parser.write(line)
-      xmlrl.write(line)
+      once(parser.classEmitter, 'end').then( function fx(){
+        once(parser.writeStream, "ready").then( function fx(){
+        currentPipe.unpipe
+        parser = new doc
+        currentPipe.pipe(parser.writeStream)
+        })
+      })
+    }
+      
+      
+     
+      parser.write(lineMod)
+      xmlrl.write(lineMod)
 
 
-    });
+    })
+
 
     await once(xmlrl, 'close');
     console.log('File processed.');
   
   } catch (err) {
     console.error(err);
-  
-}});
+  }  
+}
 
-
+processLineByLine()
